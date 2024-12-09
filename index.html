@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Intro to Luau</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Lua tutorial">
+    <link rel="stylesheet" href="styles.css">
+    </head>
+    <body>
+      <div class="title">
+      <h1>Luau Tutorial
+        <div class="square"></div>
+      </h1>
+      </div>
+      
+      <aside>
+         <label id="navbar-label">Content</label>
+            <nav id="navbar">
+              <header id="nav-header">Chapters</header>
+          <ul>
+            <li><a href="#Getting_started_with_Luau" class="nav-link" id="nav-link">Getting started with Luau</a></li>
+            <li><a href="#Luau_Syntax" class="nav-link">Luau Syntax</a></li>
+            <li><a href="#Functions_and_Datatypes" class="nav-link">Functions and Datatypes</a></li>
+            <li><a href="#Conditional_and_Operators" class="nav-link">Conditional and Operators</a></li>
+            <li><a href="#Loops_and_Dictionaries" class="nav-link">Loops and Dictionaries</a></li>
+            <li><a href="#Local,_Server_and_Module_script" class="nav-link">Local, Server and Module script</a></li>
+            </ul>
+          </nav>
+        </aside>
+
+      <main id="main-doc">
+        <section class="main-section" id="Getting_started_with_Luau">
+          <header>Getting started with Luau</header>
+          <div style="height:4px; border:2px solid; margin-top:4px;"></div>
+          <h2 id="first-head"><span style="color:blue; text-shadow:1px 1px 2px white;">Lua</span> vs <span style="color:rgba(0,255,255,40%); text-shadow:1px 1px 1px white;">Luau</span></h2>
+          <p class="important">
+            What is the difference between <code>Lua</code> and <code>Luau</code>? While Luau is technically derivatived from Lua and using specifically in Roblox, there is not a lot of differences. Performance is the main changes, along-side with more feautures and more security.
+            </p>
+
+            <p class="important">
+              For example, Luau support Compound Assignment. So you can do something like; <code>"y += x + 10"</code> in Luau, but in Lua you have to do like this; <code>"y = y + x + 10"</code>. Another example is that Luau has Sleep Function, like Wait(). While Lua does not.
+              </p>
+
+              <p class="important">
+                And did you know that Lua, Famously in game development, is also used in <i>Gary's Mod</i>, <i>World of Warcraft, Dota, Angry Birds etc</i>. Where Lua is primarily used as a scripting language due to its ease of embedding, fast execution, and relatively short learning curve, so even you can learn it..
+                </p>
+          </section>
+
+          <section class="main-section" id="Luau_Syntax">
+            <header>Luau Syntax</header>
+            <div style="height:4px; border:2px solid; margin-top:4px;"></div>
+            <p class="important">
+              In this tutorial we will be focusing on Luau, which is the main scripting language of Roblox.  
+              Let's start with: 
+              <ul style="margin:0;">
+                <li><code style="font-size:1rem;">Variable</code></li>
+                </ul>
+              </p>
+            <p class="important">
+              Assuming you already have some knowledge of Coding, But let's review what exactly is a variable again. A variable is basically a storage for values, and what is a value? It can be a number, string, boolean etc. Which we will get to them later, here is how you can declare a variable: "<code>local hotdog = fridge.hotdog</code>", in this example we start with the keyword local which make it a variable that you can only use locally, such as inside a <code>function</code>, and you also have to declare the variable before you can access it. A global variable is a variable you can use anywhere, just simply remove the local keyword. And in the path <code>fridge.hotdog</code> we access an item by first declare the parent <code>fridge</code> we then assumingly access its child <code>hotdog</code>. With this you now type <code>hotdog</code> instead of <code>fridge.hotdog</code> everytime to access the hotdog.
+              </p>
+
+              <p class="important">
+                Rules of thumb when naming Variable is that: A variable name must start with a letter or an underscore character like "_", A variable name cannot start with a number like "1, 2" etc. A variable name can only contain alpha-numeric characters and underscores "a-z, A-Z , 0-9 , and _ 
+" Variable names, or Luau in general are case-sensitive like, age, Age and AGE are three different variables.
+                </p>
+
+          </section>
+
+          <section class="main-section" id="Functions_and_Datatypes">
+            <header>Functions and Datatypes</header>
+              <p class="important">Now that we've learned about Variable, let's start with:
+                <ul style="margin:0;">
+                <li><code style="font-size:1rem;">function</code></li>
+                </ul>
+                </p>
+                <p class="important">
+                  What is a <code>function</code>? A function is a block of code that you can reuse just how many times you want, here is how you can declare a function: "<code>function sayHello(name) <br> print("Hello ".. name)<br>end</code>". <br>In this example function, we declare it by first typing <code>function</code>, next we assign it a name which in the example: <code>sayHello</code>, and the parenthesis <code>()</code> represent a parameter, and inside the parameter contain a variable: <code>(name)</code>. So what is a <code>parameter</code>? A parameter is where you can store variables that a function can use, and to assign a value to the variable you have to call the function. Here is how to call a function: "<code>sayHello("Ryan Gosling")</code>". We simply type the function's name and a parenthesis, which you can pass values to the function. In this case it is a <code>string</code>, what is a string? A string is sequences of any characters like letters, numbers etc. Enclosed in a quotation mark <code>" "</code>, in this case it is <code>"Ryan Gosling"</code>. 
+                  </p>
+                  <p class="important">
+                    A string is also a data type, and there are other data types such as: 
+                    <ul style="margin:0;">
+                <li><code style="font-size:1rem;">Number(integer are whole number like "1", while float are decimal like "1.2"</code></li>
+                <li style="margin-top:6px;"><code style="font-size:1rem;">Boolean(Have only two possible value which are:true or false)</code></li>
+                 <li style="margin-top:6px;"><code style="font-size:1rem;">table(is an array, allowing you to store multiple values of any data type. You can declare it by using curly brackets: {})</code></li>
+                 <li style="margin-top:6px;"><code style="font-size:1rem;">nil(absence of a value)</code></li>
+                </ul>
+                </p>
+                <p class="important">
+                  There are other data types like: <code>thread, enums, userdata, vector</code>.. But we're just gonna focus on the basic stuff for now. To wrap up the function, the output of it will be <code> Hello Ryan Gosling</code>".
+                  </p>
+          </section>
+
+          <section class="main-section" id="Conditional_and_Operators">
+            <header>Conditional and Operators</header>
+            <p class="important">
+              Now let's jump into the next section: <code>Conditional Statement</code>, what is a conditional statement? A conditional statement uses <code>if, else, elseif</code>, and <code>boolean values</code> to determine whether a condition is met, it is also a block level code like function. For instance, here is how you can declare a condition: <code>if age == 13 then <br> print("This person is 13")<br> elseif age == 18 and isMale == true then <br>print("This person is 18, and is a male")<br>else <br> print("This person is neither 13 or 18, and is not a male")<br> end</code><br> in this example, you can see the usage of if, else, elseif and boolean values, also the keyword <code>then, and</code>. Adding an <code>and</code> allows you to add more conditions before processing. In the first condition you can see that: <code>if age == 13 then</code>, the "==" is an equal to operator, it is to check if the age is equal to 13 or not which is different from "=", that is, to assign value.
+              </p>
+              <p class="important">
+                There are also other operators such as:  <ul style="margin:0;">
+                <li><code style="font-size:1rem;">~= (not equal to sign, example: x ~= y, x is not equal to y)</code></li>
+                <li style="margin-top:6px;"><code style="font-size:1rem;">< (less than sign, for example 6 < 7, 6 is less than 7)</code></li>
+                <li style="margin-top:6px;"><code style="font-size:1rem;">> (greater than sign, an example 7 > 6, 7 is more than 6)</code></li>
+                <li style="margin-top:6px;"><code style="font-size:1rem;"><= (less than or equal to sign: x <= 10, x is less than or equal to 10)</code></li>
+                <li style="margin-top:6px;"><code style="font-size:1rem;">>= (more than or equal to sign: x >= 10, x is more than or equal to 10)</code></li>
+                </ul>
+                </p>
+                <p class="important">
+                  In the second condition you can see the usage of <code>elseif</code>, which if the first if statement does not met, then it will move on to the second if statement, which have 2 condition: <code>elseif age == 18 and isMale == true then</code>, whether the age is equal to 18 AND whether the variable isMale is equal to true for it to print the output. Now there is also the keyword "<code>or</code>", which require one of the condition to be true instead of both: <code>elseif age == 18 or isMale == true then</code>. <br> In this example, if the first condition(<code>age == 18</code>) does not met, but the second condition(<code>isMale == true</code>) does met then it will still process. You can also combine <code>or, and</code>. Like an ice cream must have a cone <code>and</code> ice cream, but the flavor of the ice cream can be vanilla <code>or</code> cholocate. There is also a <code>not</code> keyword which is pretty much the same as <code>~=</code> or not equal to. And the last condition is just <code>else</code>, you can use <code>else</code> when the results does not met any of the <code>if</code> and <code>elseif</code> statements.
+                  </p>
+          </section>
+
+          <section class="main-section" id="Loops_and_Dictionaries">
+            <header>Loops and Dictionaries</header>
+            <p class="important">
+  What are <code>loops</code>? A loop is a way to repeat a block of code multiple times without rewriting it, Let’s start with the simplest loop: the <code>for</code> loop. Think of it as a counter. Here’s an example:<br>
+  <code>for i = 1, 5 do <br> print("Number: " .. i) <br> end</code><br>
+  In this example, the loop starts with <code>i</code> at 1 and counts up to 5, printing "Number: 1", "Number: 2", and so on. 
+  You can adjust the start and end numbers. For instance: <code>for i = 10, 1, -1 do</code> counts backward from 10 to 1. The third number, <code>-1</code>, is the step, here it is decrement by 1 like 10 to 9 then to 8, but you can change to -2, -3 etc.
+</p>
+
+<p class="important">
+  Another kind of loop is the <code>while</code> loop. It runs as long as a condition is true. I'll Give you an example:<br>
+  <code>local num = 1<br>while num <= 5 do <br>print("Count: " .. num)<br>num = num + 1<br>end</code><br>
+  This loop starts with <code>num = 1</code> and increases <code>num</code> by 1 until it reaches 5. It’s great when you don’t know beforehand how many times you’ll need to repeat something, and you can also stop the loop by using: <code>break</code>.
+</p>
+
+<p class="important">
+  Next, we have the <code>repeat</code> loop. It’s similar to a <code>while</code> loop but always runs the code block at least once. Example:<br>
+  <code>local x = 0<br>repeat <br>print("x is " .. x)<br>x = x + 1<br>until x > 5</code><br>
+  Here, the loop runs until <code>x</code> becomes greater than 5. Even if the condition is false initially, the loop will run at least once. You can also add a <code>wait()</code> or <code>task.wait()</code> to any loops, just put the duration(second) in the parenthesis.
+</p>
+
+<p class="important">
+  Now let’s talk about <code>dictionaries</code>. In Luau, dictionaries are tables with keys and values, like a digital filing cabinet. Here’s how you declare one:<br>
+  <code>local fruits = {apple = "red", banana = "yellow", grape = "purple"}</code><br>
+  Here, <code>apple</code>, <code>banana</code>, and <code>grape</code> are keys(<code>keys are similar to variables</code>), and their colors are the values. To access a value, just use its key: <code>print(fruits["apple"])</code>, which will print red, the <code>[]</code> you see is to get its value.
+</p>
+
+<p class="important">
+  You can also loop through dictionaries using the <code>pairs</code> function. For example:<br>
+  <code>for fruit, color in pairs(fruits) do <br> print(fruit .. " is " .. color) <br> end</code><br>
+  This loop prints all the keys and their assigned values, like "apple is red".
+</p>
+
+<p class="important">
+  Did you know you can mix data types in dictionaries? For example:<br>
+  <code>local mixedTable = {name = "Ryan Gosling", age = 42, isActor = true}</code><br>
+  Here, <code>name</code> is a string, <code>age</code> is a number, and <code>isActor</code> is a boolean. Dictionaries are pretty useful right?
+</p>
+
+<p class="important">
+  You can combine loops and dictionaries for more practical usages. For instance okay, let’s calculate the total of some scores:<br>
+  <code>local scores = {LouBloom = 10, TylerDurden = 15, officerK = 12}<br>local total = 0<br>for _, score in pairs(scores) do <br> total = total + score <br>end<br>print("Total score: " .. total)</code><br>
+  This example adds up all the scores and prints "Total score: 37". That wraps up the Loops and Dictionaries.
+</p>
+          </section>
+
+          <section class="main-section" id="Local,_Server_and_Module_script">
+            <header>Local, Server and Module script</header>
+            <p class="important">
+              Since we're reaching the end of this Tutorial, i'll teach you about the different script objects uses in Roblox Studio for Luau. A <code>local script</code> runs in the client side, a client is basically your device, computer, phones etc. Anything that runs in the local script will only happen to the person's device it is running on.</p> 
+              <p class="important"> A <code>server script</code>, like the name suggest, it runs on the server. Which mean whatever is running in the server script will be replicates to everyone that are in the server, like if color of a part is changed through the server script, everyone will see the change, but not the same case with local script.
+              </p>
+              <p class="important">
+    A <code>module script</code> is a reusable script that allows you to store functions, variables, and logic which can be shared across multiple scripts. Instead of duplicating code, you can create a module script and "require" it in your local or server scripts. which can be useful to prevent from making too many scripts that runs the same purpose. 
+</p>
+<p class="important">
+    For example, you could use a module script to define shared utilities like mathematical functions, or to manage game data that's accessed by both the client and server.
+</p>
+
+<p class="important" style="color:cyan; opacity:80%; border-bottom:4px solid cyan; text-shadow:1px 1px black;">
+  That will wrap up some basics of Luau, which i hope you find useful. Maybe in the future there will be continuation and more in-depth guides
+</p>
+
+          </section>
+
+        </main>
+        <footer>
+          <h3>Refrence Gang is very cool</h3>
+          </footer>
+      </body>
+  </html>
