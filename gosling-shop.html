@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Ryan Gosling's Merchandise">
+    <title> Ryan Gosling fan Shop</title>
+    <style>
+      * {
+  box-sizing:border-box;
+}
+
+:root {
+  --body-color1: rgba(160, 32, 240, 90%);
+  --body-color2: pink;
+}
+
+body {
+  margin:0;
+  background: var(--body-color1) /*url("https://ih1.redbubble.net/image.5227428706.9208/flat,750x1000,075,t.u1.webp")*/;
+  font-family:mistral;
+}
+
+.content {
+  width: 90%;
+  margin:0 auto;
+  display:grid;
+  grid-template-rows: repeat(4, 200px);
+  gap:12px;
+}
+
+#header {
+  display:grid;
+  grid-template-columns: repeat(2, 1fr);
+  position:sticky;
+  top:0;
+  justify-content:space-between;
+  width:100%;
+  margin:0 auto;
+  height:105px;
+  background: linear-gradient(180deg, var(--body-color1), var(--body-color2));
+  opacity:90%;
+  border-bottom: 2px solid white;
+  color:white;
+}
+
+#contact {
+  margin:0 auto;
+  width:70%;
+}
+
+#form {
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  border-left:2px solid white;
+  border-right:2px solid white;
+  align-items:center;
+  background: linear-gradient(60deg, var(--body-color2), transparent);
+}
+
+#form input[type="submit"] {
+  margin:12px;
+  background:linear-gradient(90deg, #6779b9, pink);
+  font-family: cursive;
+  font-size:1rem;
+  border:0;
+  color: white;
+}
+
+#form input[type="submit"]:hover {
+  transform:scale(1.1);
+  box-shadow:4px 2px 4px 1px black;
+  color: yellow;
+}
+
+#form input[type="submit"]:active {
+  transform:scale(0.9);
+}
+
+#products {
+  display:grid;
+  border-right:2px solid white;
+  border-left:2px solid white;
+  height:200px;
+  grid-template-rows: repeat(3, 1fr);
+  font-family: Arima;
+  place-items:center;
+  overflow:scroll;
+  overflow-x:hidden;
+}
+
+#products h1 {
+  color:pink;
+}
+
+#products p {
+  color:white;
+}
+
+.clothes, .mugs {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 3, 100px);
+  grid-template-rows: repeat(auto-fill,3,100px);
+  grid-auto-flow: rows;
+  grid-gap:20px;
+  justify-content:center;
+  width:70%;
+}
+
+.clothes img {
+  width: 400px;
+}
+
+.mugs img {
+  width:340px;
+}
+
+.clothes input[type="submit"], .mugs input[type="submit"] {
+  background: linear-gradient(140deg, pink, purple);
+  color:white;
+  font-weight:bold;
+}
+
+.clothes input[type="submit"]:hover, .mugs input[type="submit"]:hover {
+  transform:scale(1.05);
+  box-shadow:4px 2px 4px 1px black;
+  color:white;
+}
+
+.clothes input[type="submit"]:active, .mugs input[type="submit"]:active {
+  transform:scale(0.9);
+  box-shadow:4px 2px 4px 1px transparent;
+  color: var(--body-color2);
+}
+
+label {
+  color:white;
+  font-size:1.4rem;
+  white-space:nowrap;
+  text-align:center;
+}
+
+input {
+  display:block;
+  margin-top:10px;
+}
+
+#nav-bar {
+  display:grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap:12px;
+  place-items:center;
+  font-family:Arimo;
+}
+
+.logo-contain {
+  display:grid;
+  grid-template-columns: 100px 100px;
+}
+
+#logo-name {
+  text-align:center;
+  font-size: 1.6rem;
+}
+
+#nav-bar a {
+ font-size:1.5rem;
+ grid-row-start: 2;
+ text-decoration:none;
+ color:purple;
+}
+
+#nav-bar a:hover {
+ color:white;
+}
+
+#header img {
+  width: 82px;
+  min-width: 70px;
+}
+
+.video-contain {
+  display:grid;
+  font-family:Arimo;
+  grid-template-columns: 1fr 1fr;
+  justify-content:center;
+  border-top:2px solid white;
+  margin:4px auto;
+  width:80%;
+  height:200px;
+  font-size:1.4rem;
+  color: white;
+}
+
+iframe {
+  width:100%;
+  height:100%;
+  border-radius:30%;
+  margin-top: 8px;
+}
+
+@media (max-width: 490px) {
+
+  .content {
+    width:100%;
+  }
+
+  #header {
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: 1fr 1fr;
+  justify-content:space-evenly;
+  background: linear-gradient(180deg, var(--body-color1), var(--body-color2));
+}
+
+.clothes img {
+  width: 300px;
+}
+
+.mugs img {
+  width:240px;
+}
+
+  #logo-name {
+  position:relative;
+  font-size: 1.3rem;
+  left:-6px;
+}
+
+#nav-bar a {
+ font-size:1.099rem;
+}
+
+#nav-bar {
+  display:flex;
+  flex-direction:row;
+  justify-content:left;
+  flex-wrap:nowrap;
+}
+
+.logo-contain {
+  display:grid;
+  grid-template-columns: 100px 100px;
+}
+
+}
+
+@media (max-width:370px) {
+
+#nav-bar {
+  display:flex;
+  flex-direction:column;
+  flex-wrap:wrap;
+}
+
+#products {
+  width:96%;
+  margin:0 auto;
+}
+
+.clothes, .mugs {
+  place-items:start;
+  width:240px;
+}
+
+.clothes img {
+  width: 240px;
+}
+
+.mugs img {
+  width:190;
+}
+
+}
+    </style>
+    </head>
+    <body>
+      <main class="content">
+        <header id="header">
+          <div class="logo-contain">
+            <img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/d9cf4e71-4277-4bf3-990d-198d1b038db9/dg3c62g-1d3c9798-8f04-4bd9-a506-1c72a78ab5fc.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2Q5Y2Y0ZTcxLTQyNzctNGJmMy05OTBkLTE5OGQxYjAzOGRiOVwvZGczYzYyZy0xZDNjOTc5OC04ZjA0LTRiZDktYTUwNi0xYzcyYTc4YWI1ZmMucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.qtvglMFD1DWqlpcN866bwCdHBL_GWeqh_O2TjK6y7ys" alt="ryan-gosling-ken" id="header-img">
+           <h2 id="logo-name">Gosling's fan shop</h2>
+          </div>
+          
+          <nav id="nav-bar">
+            <a href="#contact" class="nav-link">Contact</a>
+            <a href="#products" class="nav-link">Products</a>
+            <a href="#video" class="nav-link">Review</a>
+            </nav>
+          </header>
+
+          <section id="contact">
+            <form action ="https://www.freecodecamp.com/email-submit" id="form">
+              <label for="email">
+               Your Contact Info
+              <input id="email" placeholder="@Email" type="email" name="email">
+               </label>
+               <label for="name">
+               
+              <input id="name" placeholder="Name">
+               </label>
+              <input type="submit" value="Send the mail" id="submit">
+              </form>
+            </section>
+            <section id="products">
+              <h1>Clothes</h1>
+              <p style="text-align:justify; margin-top:12px; width:95%"> Here at Ryan Gosling fan Shop, we sell the finest, and really, that's not a flex at all.. Because as Gosling's fans, we all strive to be better. Just like how a simple hand pose mistake in <em>La La Land</em> Poster got Ryan regretted and upset, that he wishes he could fix it. Well, that is a good thing because we should all learn from our mistakes! And your mistake would be to not check out our merchandise..</p>
+              <figure class="clothes">
+              <img src="https://media.gq.com/photos/573e05804bf860ff12c0e951/16:9/w_1280,c_limit/gosling-drive-jacket.jpg" alt="Drive jacket">
+              <input type="submit" value="ADD TO CART ( 68.99$ )">
+              <img src="https://down-br.img.susercontent.com/file/cn-11134207-7r98o-lnbhqnvu7ibse0" alt="Ken beach clothes">
+              <input type="submit" value="ADD TO CART ( 54.99$ )">
+              <img src="https://m.media-amazon.com/images/I/71LTnB5vT3L._AC_UY1000_.jpg" alt="Officer k coat">
+              <input type="submit" value="ADD TO CART ( 74.99$ )">
+              </figure>
+
+              <h1> Mugs </h1>
+                <p style="width:95%;"> You can't go wrong with Ryan Gosling on your Mugs.. There is nothing better than to stay hydrate, enjoying your Coffee perhaps while watching your favoriate actor(we all knows who, he is on your cup, always remind you to be not thirsty). 
+
+              <figure class="mugs">
+                <img src="https://res.cloudinary.com/teepublic/image/private/s--G-msW8zz--/c_scale,h_776/c_lpad,g_north_west,h_801,w_1802,x_177,y_12/c_crop,h_801,w_691,x_125/c_mfit,g_north_west,u_misc:Mug%20Effect%20Coffee3%20Left/e_displace,fl_layer_apply,x_14,y_-2/c_mfit,g_north_east,u_misc:Mug%20Effect%20Coffee3%20Right/e_displace,fl_layer_apply,x_-14,y_-2/c_crop,h_801,w_656/g_north_west,l_upload:v1466696262:production:blanks:w00xdkhjelyrnp8i8wxr,x_-410,y_-235/b_rgb:ffffff/c_limit,f_auto,h_630,q_auto:good:420,w_630/v1522002869/production/designs/2528281_0.jpg" alt="Gosling mug">
+              <input type="submit" value="ADD TO CART ( 22.99$ )">
+              <img src="https://i.pinimg.com/736x/af/ab/e0/afabe0ce6f1afe53b73578cbf6b04e33.jpg" alt="Ken Mug">
+              <input type="submit" value="ADD TO CART ( 26.99$ )">
+              <img src="https://ih1.redbubble.net/image.439339238.1768/mug,standard,x334,right-pad,600x600,f8f8f8.u7.jpg" alt="hey girl mug">
+              <input type="submit" value="ADD TO CART ( 18.99$ )">
+                </figure>
+              </section>
+              <div class="video-contain">
+                <p>We can confirm our quality <br> based on Gosling's enthusiam in this video</p>
+              <iframe id="video" src="https://www.youtube.com/embed/Cvh_87pDaYU" title="Ryan Gosling&#39;s Big Gift" frameborder="0" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+              </div>
+              <section id="selection">
+                </section>
+        </main>
+      </body>
+  </html>
