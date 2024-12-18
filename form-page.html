@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+      body {
+  margin:0;
+  padding:0;
+  font-family:cursive;
+  background-image:url("https://i.pinimg.com/originals/74/07/e7/7407e7fee49407d44e7c653eb2647105.gif");
+color: white;
+}
+
+form {
+  background-color:#29465B;
+  border-radius:4px;
+  color:cyan;
+  width: auto;
+  max-width: 60%;
+  min-width: 270px;
+  margin: 4px auto;
+}
+
+#num1, #num2, #num3,#ratelabel1, #ratelabel2  {
+  display:inline;
+}
+
+#name, #number, #email {
+  background-color: black;
+  border: 1px solid gray;
+  color:rgb(0,255,0);
+  font-family:"Courier New", Courier, monospace;
+  border-radius: 4px;
+}
+
+#petother {
+  display:inline-block;
+  margin-top:10px;
+}
+
+.petkinds, .petlabel {
+  display:inline;
+}
+
+input[type="submit"] {
+  margin:4px auto;
+  display:flex;
+  font-family: cursive;
+  border: 2px solid black;
+}
+
+select {
+  font-family:cursive;
+  color:rgb(0,255,0);
+  background-color: black;
+}
+
+select:active {
+  transform:rotate(350deg);
+}
+
+textarea {
+  font-family:"Courier New", Courier, monospace;
+  font-weight:bold;
+  color:rgb(0,255,0);
+  background-color:black;
+  border:1px solid gray;
+  border-radius:3px;
+  width:100%;
+}
+
+input[type="submit"]:hover {
+  background-color:gray;
+}
+
+input[type="submit"]:active {
+  background-color:white;
+  transform:scale(0.85);
+}
+
+input[type="file"] {
+  color:white;
+}
+
+input::file-selector-button {
+  background-color:black;
+  color:rgb(0,255,0);
+}
+
+input::file-selector-button:hover {
+  background-color:gray;
+  border: 2px solid black;
+}
+
+label {
+  display:block;
+  margin: 8px auto;
+}
+
+h1 {
+  font-size:10vh;
+  margin: 0 auto;
+  text-align:center;
+}
+
+legend {
+  font-size:5vh;
+}
+
+select {
+  margin: 5px 0 0;
+  display:block;
+}
+
+input {
+  width:auto;
+  display:inline;
+}
+
+p {
+  font-family: monospace;
+  text-align:center;
+  font-size:4vh;
+  margin:6px auto;
+  background-color:black;
+  opacity:80%;
+  display:absolute;
+}
+    </style>
+    </head>
+    <body>
+      <h1 id="title">
+        Pet prefering form 
+        </h1>
+        <p id="description">
+          We want to know about you and your pets
+          </p>
+
+          <form action="#" method="post" id="survey-form">
+            <fieldset>
+              <legend>
+                Personal Information
+              </legend>
+              <label for="name" id="name-label">
+                enter name:
+              <input id="name" required type="text" placeholder="Nick name is fine">
+              <label for="number" id="number-label">
+                enter age:
+              <input id="number" type="number" min ="13" max="100" placeholder="Age">
+              </label>
+
+              <label for="email" id="email-label">
+                enter email:
+              <input id="email" type="email" placeholder="*****@gmail.com" required>
+              </label>
+
+              </fieldset>
+
+               <fieldset>
+              <legend>
+                Your pets
+              </legend>
+              <label for="dropdown" id="drop">
+                Favorite Pet type
+                <select id="dropdown">
+                  <option> Dog</option>
+                  <option> Cat</option>
+                  <option> Rabbit</option>
+                  <option> Bird</option>
+                  <option> Other</option>
+                </select>
+                </label>
+                <hr>
+                
+                <label>
+                  How many pets you got?
+                   </label>
+                   <label id="num1">
+                     one ->
+                  <input id="petamount1" type="radio" name="petnumber" checked value="number1">
+                  </label>
+                 
+                  <label id="num2">
+                    two ->
+                    <input id="petamount2" type="radio" name="petnumber" value="number2">
+                    </label>
+                     <label id="num3">
+                    three or more ->
+                    <input id="petamount3" type="radio" name="petnumber" value="number3">
+                    </label>
+                    <hr>
+
+                    <label id="petlabel">
+                      What kind of pets you have?
+                      </label>
+
+                      <label class="petlabel">
+                        Dog ->
+                         <input id="petkind" type="checkbox" class="petkinds" value="Dog">
+                        </label>
+
+                        <label class="petlabel">
+                        Cat ->
+                         <input id="petkind2" type="checkbox" class="petkinds" value="Cat">
+                        </label>
+                         <label class="petlabel">
+                        Rabbit ->
+                         <input id="petkind3" type="checkbox" class="petkinds" value="Rabbit">
+                        </label>
+                        <label   class="petlabel"> Bird ->
+                         <input id="petkind4" type="checkbox" class="petkinds" value="Bird">
+                        </label>
+                         <label   class="petlabel" id="petother"> other ->
+                         <input id="petother" type="checkbox" class="petkinds" value="Other">
+                        </label>
+                        <hr>
+                        <label for="pic">
+                          Upload your pet picture (optional):
+                          <input id="pic" type="file">
+                          </label>
+              </fieldset>
+
+               <fieldset>
+              <legend>
+                Extra Info
+              </legend>
+              <label class="textclass">
+                Describing your pets  (optional):
+                <textarea
+id="Petinfo" rows="4" cols="30" placeholder="My pet turtle is actually faster than it looks.."></textarea>
+                </label>
+
+                              <label class="textclass">
+                Describing yourself (optional):
+               <textarea
+id="Personinfo" rows="4" cols="30" placeholder="I am an outgoing person.."></textarea>
+                </label>
+                <hr>
+
+                <label>
+                  Did you enjoy this survey?
+                  </label>
+                  Yes
+                  <label for="rate1" id="ratelabel1">
+                  <input id="rate1" type="radio" name="Rate" value="yes" checked>
+                  </label>
+
+                  </label>
+                  No
+                  <label for="rate2" id="ratelabel2">
+                  <input id="rate2" type="radio" name="Rate" value="yes">
+                  </label>
+              </fieldset>
+              <label>
+
+            </form>
+             <input type="submit" id="submit">
+      </body>
+      </html>
