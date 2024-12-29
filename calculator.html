@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin:0;
+            background-color: rgb(29, 50, 107);
+        }
+
+        :root {
+            --color1: rgba(0, 0, 255, 0.644);
+        }
+
+        .content {
+            display:grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows:repeat(4, 1fr);
+            gap:6px;
+            width:95%;
+            height:100vh;
+            margin:0 auto;
+        }
+
+        .generator.second {
+            background-color: var(--color1);
+        }
+
+        .generator.first {
+            grid-column: 1/4;
+            grid-row: 2/5;
+            color: white;
+            height: 800px;
+            display:flex;
+            flex-direction: row;
+            justify-content: start;
+            align-items: flex-start;
+        }
+
+        .generator.second {
+            grid-column: 1/4;
+            height:100px;
+        }
+
+        .generator.third {
+            grid-row: 2/5;
+            height:400px;
+        }
+
+        #calcform {
+            width: 100%;
+            height: 200px;
+            display:flex;
+            flex-direction: row;
+            justify-content: center;
+            font-family: monospace;
+        }
+
+        input,select {
+            background-color: black;
+            color:cyan;
+            cursor:pointer;
+        }
+
+        input {
+            font-size: 1.1rem;
+        }
+
+        .containing {
+            width: 100%;
+            height:400px;
+            display: grid;
+            grid-template-columns: 60% 40%;
+            grid-template-rows: repeat(5, 70px);
+            background-color: black;
+            border-radius: 8px;
+        }
+
+        #calcInput {
+            height:50px;
+            width: 70%;
+            grid-column: 1;
+        }
+
+        #calcInputlabel {
+            grid-column: 1;
+            position: relative;
+            top:20px;
+        }
+
+        #mutiplyButton {
+          color:black;
+          height:30px;
+          width: 50%;
+          grid-column: 1;
+        }
+
+        #howMany {
+            width: 30%;
+            grid-column: 1;
+            grid-row: 3;
+            height:40px;
+        }
+
+        #result {
+            white-space: wrap;
+            grid-column: 2;
+        }
+
+        #previousInput {
+            border: 2px solid white;
+            width: 80%;
+            overflow-y:scroll;
+            grid-column: 2/3;
+            grid-row: 2/4;
+            font-size: 1.2rem;
+            text-align: center;
+        }
+
+        #operator {
+            height:30px;
+        }
+
+        #prevIn {
+            grid-column: 2;
+            grid-row: 1;
+        }
+
+        .all {
+            display:flex;flex-direction:row;justify-content:space-evenly;
+            grid-column: 1;
+            font-size: 1.2rem;
+            max-width: 550px;
+        }
+
+        button {
+            font-size: 1.2rem;
+            cursor:pointer;
+        }
+
+        button:hover {
+            animation: button 0.1s ease-in-out 1;
+  transition: 0.1 ease-in-out;
+            transform: scale(1.15);
+        }
+
+        button:active {
+            animation: click 0.1s ease-in-out 1;
+  transition: 0.1 ease-in-out;
+  transform: scale(0.9);
+        }
+
+        @keyframes click {
+            from {
+                transform: scale(1);
+            }
+            to {
+                transform: scale(0.9);
+            }
+        }
+
+        @keyframes button {
+            0% {
+                transform: scale(1);
+            }
+            100% {
+                transform: scale(1.15);
+            }
+        }
+
+
+        @media (max-width:420px) {
+            #wrapper {
+                grid-column: 1;
+                text-align: center;
+                overflow:scroll;
+        }
+        #previousInput {
+            grid-column: 2/3;
+            grid-row: 3/5;
+        }
+        #prevIn {
+            grid-row:2;
+        }
+
+        .all.first {
+            position: relative;
+            left: 35px;
+        }
+        }
+    </style>
+</head>
+<body>
+    <main class="content">
+        <section class="generator first">
+            <form id="calcform">
+                <div class="containing">
+                <span class="all first">
+                <label for="calcInput" id="calcInputlabel">
+                    Number input container
+                </label>
+            </span>
+                <span class="all">
+                <input type="number" id="calcInput">
+            </span>
+                <span class="all">
+                <button type="button" id="mutiplyButton">Calculate</button>
+               </span>
+                <span class="all"style="grid-column: 1;">
+                <label for="operator" id="ope">operators</label>
+                <select id="operator">
+                    <option id="addition">+</option>
+                    <option id="subtraction">-</option>
+                    <option id="mutiply">*</option>
+                    <option id="divide">/</option>
+                    <option id="exponent">**</option>
+                    <option id="sqrt">√</option>
+                    <option id="round">≈</option>
+                </select>
+            </span>
+            <span class="all">
+                <label for="howMany" id="amount">By</label>
+                <input type="number" id="howMany">
+                </span>
+                <span id="wrapper">
+                <h3 id="result">result</h3>
+               </span>
+                <h3 id="prevIn" >previous 5 inputs: </h3>
+                <div id="previousInput">
+                </div>
+                </div>
+            </form>
+        </section>
+        <section class="generator second">
+            <h1 style="text-align:center;color:white;font-family:monospace;">Calculator for my very cool little sister</h1>
+        </section>
+    </main>
+    <script>
+        const calcInput = document.getElementById("calcInput");
+        const multButton = document.getElementById("mutiplyButton");
+        const calcInputlabel = document.getElementById("calcInputlabel");
+        const howMany = document.getElementById("howMany");
+        const resultbox = document.getElementById("result");
+        const operator = document.getElementById("operator");
+        const prevInputBox = document.getElementById("previousInput");
+        const prevInputSave = [];
+        const regex = /e/i; 
+        
+        function clearInput(whichInput) {
+            const realValue = whichInput.value.replace(regex, '');
+            whichInput.value = realValue;
+        }
+
+        function validationInput(theValue, whichInput) {
+            if (!/^-?\d*\.?\d*$/.test(theValue)) {
+            clearInput(whichInput); 
+        }
+    }
+
+        function calculate() {
+            const calcValue = calcInput?.value;
+            const byValue = howMany?.value;
+            const mathOp = operator?.value;
+            let results;
+
+            if (calcValue) {
+        
+            if (mathOp === "*" || mathOp === "/") {
+                results = mathOp ==="*" ? calcValue * byValue : calcValue / byValue;
+            } else if (mathOp === "+" || mathOp === "-") { 
+                results = mathOp ==="+" ? Number(calcValue) + Number(byValue) : calcValue - howMany.value;
+            } else if (mathOp === "**" || mathOp === "√") {
+                results = mathOp === "**" ? calcValue ** byValue : Math.sqrt(calcValue);
+            } else if (mathOp === "≈" ) {
+                results = Math.round(calcValue);
+            } 
+
+            resultbox.innerText = `The answer 
+            of: ${calcValue} ${operator.value} ${howMany.value} is ${results}`
+
+            if (prevInputSave.length <= 4){
+            prevInputSave.push({
+                "number": calcValue,
+                "operate": mathOp,
+                "by": byValue
+            })
+
+            const lastEntry = prevInputSave[prevInputSave.length - 1 ];
+
+            const PrevInputString = `
+        <h5>${lastEntry.number} ${lastEntry.operate} ${lastEntry.by}</h5>
+        `;
+        
+            prevInputBox.insertAdjacentHTML("beforeend", PrevInputString);
+        } else {
+            prevInputSave.shift();
+
+            if (prevInputBox.firstElementChild) {
+                prevInputBox.removeChild(prevInputBox.firstElementChild);
+            }
+        }
+            
+            howMany.value = "";
+            calcInput.value = "";
+        }else {
+        resultbox.innerText = "(there is nothing to calculate panda)";
+    }
+    } 
+
+        multButton.onclick = calculate;
+
+        calcInput.addEventListener("input", () => {
+            const currentValue = calcInput.value;
+            validationInput(currentValue, calcInput);
+        }
+        );
+
+        howMany.addEventListener("input", () => {
+            const currentValue2 = howMany.value;
+            validationInput(currentValue2, howMany);
+        })
+    </script>
+</body>
+</html>
