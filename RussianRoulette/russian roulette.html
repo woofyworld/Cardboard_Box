@@ -1,0 +1,308 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>russian roulette</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      
+      :root {
+        --softBlue: #4264A9;
+      }
+      body{
+        background-color:var(--softBlue);
+        margin:0;
+        padding:0;
+      }
+      
+      #infoSect {
+        color:black;
+        border: 4px solid;
+        background-color: darkorange;
+        max-width: 530px;
+        margin:0 auto;
+      }
+
+      #infoSect details span {
+        color: white;
+        font-size: 1.3rem;
+      }
+
+      #infoSect details {
+        text-align: justify;
+      }
+      
+      #matchInfo {
+        text-align: center;
+      }
+      
+      #content {
+        width:100%;
+        height:100vh;
+      }
+      
+      #mainSect {
+        font-family: monospace;
+        background: linear-gradient(120deg,black, var(--softBlue));
+        height:200px;
+        max-width: 530px;
+        margin:6px auto 0 auto;
+        border:4px solid black;
+        display:flex;
+        flex-direction: row;
+        justify-content: space-between;
+      }
+      
+      #playButton {
+        width:100px;
+        height:60px;
+        color:white;
+        background: darkred;
+        border-radius:20%;
+        align-self: center;
+        font-weight: bold;
+      }
+      
+      #bulletBox {
+        border: 2px solid white;
+        display:flex;
+        flex-direction: column;
+        width:25%;
+        align-items: center;
+        background: black;
+      }
+      
+      #addBullet, #remvBullet {
+        color:black;
+        width: 60px;
+        height:50px;
+        background: darkorange;
+        font-size:0.7rem;
+        border-radius: 50%;
+      }
+      
+      #chances {
+        width:100%;
+        height:50px;
+        color:red;
+        text-align:center;
+      }
+
+      #gameLogBox {
+        background-color: black;
+        width: 30%;
+        border: 4px solid white;
+        color:white;
+        text-align: left;
+        overflow-y: scroll;
+        font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+      }
+
+      #gamesList {
+        position: relative;
+        left:-6px;
+      }
+
+      #gameLogBox h4 {
+        margin:0 0 12px 0;
+      }
+      
+    </style>
+  </head>
+  <body>
+    <main id="content">
+        <div id="infoSect">
+          <details><span>welcome to russian roulette! A game at the expense of your own life! You can put more bullets if you're feeling adventurous, or remove them if you don't wanna get too risky.. Your choice. Your opponent is also gonna be a Robot!</span></details>
+          <h2 id="matchInfo">Russian Roulette</h2>
+        </div>
+        <div id="mainSect">
+          <span id="bulletBox">
+          <button id="addBullet">Add Bullet</button>
+          <h4 id="chances">chance of death 0/6</h4>
+          <button id="remvBullet">Remove Bullet</button>
+          </span>
+          
+          <button id="playButton" type="button">Start the game</button>
+
+          <span id="gameLogBox">
+            <h4 style="text-align:center;">Games Log</h4>
+            <ol id="gamesList">
+              
+            </ol>
+          </span>
+        </div>
+      </main>
+    <script>
+    const body = document.querySelector("body")
+    const playButton = document.getElementById("playButton");
+    const matchInfo = document.getElementById("matchInfo");
+    const infoSect = document.getElementById("infoSect");
+    const mainSect = document.getElementById("mainSect");
+    const addBullet = document.getElementById("addBullet");
+    const remvBullet = document.getElementById("remvBullet");
+    const chances = document.getElementById("chances");
+    const sounds = ["/RussianRoulette/cocking-a-revolver-6279.mp3",   
+    "/RussianRoulette\lighter-click-271118.mp3",
+    "/RussianRoulette/revolver-spin-96947.mp3",
+    "/RussianRoulette/single-pistol-gunshot-33-37187.mp3"
+    ];
+    const gamesList = document.getElementById("gamesList");
+    let gameResults = "";
+    let sound = new Audio();
+
+    let chambers = ["off", "off", "off", "off", "off", "off"];
+    let gunStage = 0;
+    let ammo = 0; 
+    let currentTurn;
+    let matchOver = false;
+
+    const stageInstruct = [
+      "You need at least a bullet",
+      "Spin the cylinder",
+        {
+      player: "Put the gun against your head",
+      robot: "Put the gun against its head",
+        },
+      "Bang?",
+      {
+        one: "Bang!",
+        two: "The gun clicked",
+      },
+      {
+        player: "You died, robot wins",
+        robot: "Robot dies, you win",
+      },
+      "Rematch?",
+    ];
+    
+    function playSfx(sfx) {
+      sound = new Audio(sfx);
+      sound.play();
+    }
+
+    function resetGame() {
+      gunStage = 0;
+      currentTurn = "player";
+      playButton.innerText = "Start the game";
+      matchInfo.innerText = "";
+      updateChances();
+      body.style.backgroundColor = "#4264A9" ;
+      matchOver = false;
+    }
+
+    function spinCylinder() {
+      chambers = chambers.sort(() => Math.random() - 0.5);
+      matchInfo.innerText = "Spin of your fate";
+      playSfx(sounds[2]);
+    }
+
+    function trigger(whoseTurn) {
+      const shot = chambers.shift();
+      chambers.push("off");
+
+      if (shot === "fire") {
+        return {
+          result: "Bang!",
+          winner: whoseTurn === "player" ? "robot" : "player",
+        };
+      } else {
+        return {
+          result: "Click!",
+          winner: null,
+        };
+      }
+    }
+
+    function updateChances() {
+      chances.innerText = `Chance of death: ${ammo}/${chambers.length}`;
+    }
+
+    function takeTurn() {
+      if (ammo === 0) {
+        playButton.innerText = stageInstruct[0];
+        return;
+      }
+
+      if (gunStage === 0) {
+        gunStage = 1;
+        playButton.innerText = stageInstruct[1];
+        currentTurn = Math.random() < 0.5 ? "player" : "robot";
+        matchInfo.innerText = `${currentTurn} go first`;
+        return;
+      }
+
+      if (gunStage === 1) {
+        gunStage = 2;
+        playButton.innerText = stageInstruct[2][currentTurn];
+        spinCylinder();
+        updateChances();
+        return;
+      }
+
+      if (gunStage === 2) {
+        gunStage = 3;
+        playButton.innerText = stageInstruct[3];
+
+        const outcome = trigger(currentTurn);
+        if (outcome.result === "Bang!") {
+          playSfx(sounds[3]);
+      matchOver = true;
+          playButton.innerText = `${outcome.result} ${stageInstruct[5][currentTurn]}`;
+          matchInfo.innerText = `Game Over: ${outcome.winner.toUpperCase()} wins!`;
+          gunStage = 6;
+          playButton.innerText = stageInstruct[6];
+          body.style.backgroundColor = "red";
+          gameResults = `<li>${outcome.winner} won, ${chances.innerText}</li>`;
+          gamesList.insertAdjacentHTML("beforeend", gameResults);
+        } else {
+          playSfx(sounds[1]);
+          matchInfo.innerText = `${outcome.result} Next turn: ${currentTurn === "player" ? "Robot" : "Player"}`;
+          playButton.innerText = stageInstruct[1];
+          currentTurn = currentTurn === "player" ? "robot" : "player";
+          gunStage = 1;
+          
+        }
+      } 
+      if (gunStage === 6) {
+        gunStage = 7
+      }
+      else if (gunStage === 7) {
+        chambers = ["off", "off", "off", "off", "off", "off"];
+        ammo = 0;
+        gunStage = 1;
+        resetGame();
+      }
+    }
+
+    function manageAmmo(action) {
+      if (matchOver !== true) {
+      if (action === "add" && ammo <= chambers.length - 1) {
+        ammo++;
+        chambers[ammo - 1] = "fire";
+        playSfx(sounds[0]);
+      } else if (action === "remove" && ammo > 0) {
+        ammo--;
+        chambers[ammo] = "off";
+      }
+      resetGame()
+      updateChances();
+      matchInfo.innerText = "Round in progress";
+      }
+    }
+
+    playButton.onclick = takeTurn;
+
+    addBullet.onclick = () => {
+      manageAmmo("add");
+    };
+
+    remvBullet.onclick = () => {
+      manageAmmo("remove");
+    };
+
+    </script>
+  </body>
+</html>
