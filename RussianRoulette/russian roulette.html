@@ -14,6 +14,8 @@
       }
       body{
         background-color:var(--softBlue);
+        background: url("https://i.pinimg.com/736x/30/78/49/30784933cc6264631613c849806d2dbc.jpg") black;
+        background-repeat: no-repeat;
         margin:0;
         padding:0;
       }
@@ -22,8 +24,11 @@
         color:black;
         border: 4px solid;
         background-color: darkorange;
-        max-width: 530px;
+        max-width: 650px;
         margin:0 auto;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(2, auto);
       }
 
       #infoSect details span {
@@ -33,14 +38,19 @@
 
       #infoSect details {
         text-align: justify;
+        width:95%;
+        grid-column: 1/3;
       }
       
       #matchInfo {
         text-align: center;
+        white-space: nowrap;
+        grid-row: 2;
+        grid-column: 2;
       }
       
       #content {
-        width:100%;
+        width:100vw;
         height:100vh;
       }
       
@@ -48,7 +58,7 @@
         font-family: monospace;
         background: linear-gradient(120deg,black, var(--softBlue));
         height:200px;
-        max-width: 530px;
+        max-width: 650px;
         margin:6px auto 0 auto;
         border:4px solid black;
         display:flex;
@@ -73,6 +83,10 @@
         width:25%;
         align-items: center;
         background: black;
+      }
+
+      #addBullet, #remvBullet, #playButton, #openOrClose {
+        cursor:pointer;
       }
       
       #addBullet, #remvBullet {
@@ -108,6 +122,78 @@
 
       #gameLogBox h4 {
         margin:0 0 12px 0;
+        font-weight: 400;
+      }
+
+      #menuTab {
+        width: clamp(170px, 50%, 450px);
+        min-height: 200px;
+        height:auto;
+        background-color: darkred;
+        border:2px solid;
+        border-radius: 4%;
+        display:none;
+        flex-direction: row;
+        flex-wrap: wrap;
+      }
+
+      #buttonMenuBox {
+        display: flex;
+        flex-direction: row;
+        justify-content:end;
+        grid-row: 1;
+        grid-column: 3;
+      }
+
+      #openOrClose {
+        width: clamp(90px, 50%, 150px);
+        height:30px;
+        border-radius:10%;
+        background: black;
+        color: white;
+        font-family: monospace;
+        align-self: flex-start;
+        margin: 4px 4px 0 0;
+        z-index: 4;
+      }
+
+      .settings {
+        border-radius:10%;
+        max-height: 100px;
+        color:white;
+        border:0;
+      }
+
+      #badgeField { 
+        align-self: end;
+        overflow-y: scroll;
+      }
+
+      .badge {
+        color:cyan;
+        font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+      }
+
+      .earnBadge {
+        color:burlywood;
+        font-weight: bold;
+        font-style: italic;
+      }
+
+      #menuWrapper {
+        height:200px;
+        max-width: 650px;
+        margin: 6px auto;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+      }
+
+      #helloButton {
+        border-radius: 10%;
+        cursor:pointer;
+        text-transform: uppercase;
+        background: orange;
       }
       
     </style>
@@ -115,8 +201,10 @@
   <body>
     <main id="content">
         <div id="infoSect">
-          <details><span>welcome to russian roulette! A game at the expense of your own life! You can put more bullets if you're feeling adventurous, or remove them if you don't wanna get too risky.. Your choice. Your opponent is also gonna be a Robot!</span></details>
+          <details><span>welcome to russian roulette! A game at the expense of your own life! You can put more bullets if you're feeling adventurous, or remove them if you don't wanna get too risky.. Your choice. And apparently, no one wanna risk their lives so your opponent is a robot</span></details>
           <h2 id="matchInfo">Russian Roulette</h2>
+          <span id="buttonMenuBox"><button type="button" id="openOrClose">Menu
+          </button></span>
         </div>
         <div id="mainSect">
           <span id="bulletBox">
@@ -124,16 +212,33 @@
           <h4 id="chances">chance of death 0/6</h4>
           <button id="remvBullet">Remove Bullet</button>
           </span>
-          
           <button id="playButton" type="button">Start the game</button>
-
           <span id="gameLogBox">
             <h4 style="text-align:center;">Games Log</h4>
             <ol id="gamesList">
-              
             </ol>
           </span>
         </div>
+
+        <div id="menuWrapper">
+        <div id="menuTab">
+          <fieldset id="generalSetting" class="settings">
+              <legend>random setting</legend>
+              <button id="helloButton">Alert Hello</button>
+          </fieldset>
+          <fieldset id="badgeField" class="settings">
+            <legend style="color:white">Challenges</legend>
+            <div id="surviveFiveOfSix" class="badge">
+              starting turn as player and win the game with 5/6 death chance
+              <div id="SFOS" class="earnBadge">Not Own</div>
+            </div>
+            <div id="winAHundredGames" class="badge">
+              win 100 games against robot
+              <div id="WAHG" class="earnBadge">Not Own</div>
+            </div>
+          </fieldset>
+        </div>
+      </div>
       </main>
     <script>
     const body = document.querySelector("body")
@@ -144,15 +249,36 @@
     const addBullet = document.getElementById("addBullet");
     const remvBullet = document.getElementById("remvBullet");
     const chances = document.getElementById("chances");
+    const menuButton = document.getElementById("openOrClose");
+    const menuTab = document.getElementById("menuTab");
     const sounds = ["https://github.com/woofyworld/scripting_things/blob/main/RussianRoulette/cocking-a-revolver-6279.mp3?raw=true",   
     "https://github.com/woofyworld/scripting_things/blob/main/RussianRoulette/lighter-click-271118.mp3?raw=true",
     "https://github.com/woofyworld/scripting_things/blob/main/RussianRoulette/revolver-spin-96947.mp3?raw=true",
     "https://github.com/woofyworld/scripting_things/blob/main/RussianRoulette/single-pistol-gunshot-33-37187.mp3?raw=true"
     ];
     const gamesList = document.getElementById("gamesList");
+    const SFOS = document.getElementById("SFOS");
+    const WAHG = document.getElementById("WAHG");
+    let playerData = [
+      {
+        SFOS: "Not Own",
+        WAHG: "Not Own",
+        winningTimes: 0,
+      }
+    ]
+    const toggleMenu = () => {
+      menuButton.innerText = menuButton.innerText === "Close" ? "Menu" : "Close";
+
+      menuTab.style.display = menuTab.style.display === "flex" ? "none" : "flex";
+    }
+    let backgroundStuff = [
+    "black",
+    "https://i.pinimg.com/736x/30/78/49/30784933cc6264631613c849806d2dbc.jpg"
+    ];
+    let startingTurn; 
+    let winner;
     let gameResults = "";
     let sound = new Audio();
-
     let chambers = ["off", "off", "off", "off", "off", "off"];
     let gunStage = 0;
     let ammo = 0; 
@@ -177,6 +303,35 @@
       },
       "Rematch?",
     ];
+
+    function saveData() {
+      if (startingTurn === "player" && ammo === 5 && winner === "player" ) {
+        playerData[0].SFOS = "Challenge Beaten";
+      } 
+      
+      if (winner === "player") {
+        playerData[0].winningTimes++;
+      }
+
+      if (playerData[0].winningTimes >= 100) {
+        playerData[0].WAHG = "Challenge Beaten!";
+      }
+      
+      localStorage.setItem("playerData", JSON.stringify(playerData));
+    }
+
+    function getData() {
+      const datas = JSON.parse(localStorage.getItem("playerData"));
+      if (datas) {
+        playerData = datas;
+
+        SFOS.innerText = playerData[0].SFOS;
+
+        WAHG.innerText = playerData[0].winningTimes >= 100 ? WAHG.innerText = playerData[0].WAHG : `You won: ${playerData[0].winningTimes} times`;
+      } else {
+        return;
+      }
+    }
     
     function playSfx(sfx) {
       sound = new Audio(sfx);
@@ -189,8 +344,14 @@
       playButton.innerText = "Start the game";
       matchInfo.innerText = "";
       updateChances();
-      body.style.backgroundColor = "#4264A9" ;
+
+      body.style.backgroundImage =  `url(${backgroundStuff[1]})`;
+      body.style.backgroundRepeat = "no-repeat";
+
       matchOver = false;
+      winner = "";
+      startingTurn = "";
+      saveData();
     }
 
     function spinCylinder() {
@@ -231,6 +392,7 @@
         playButton.innerText = stageInstruct[1];
         currentTurn = Math.random() < 0.5 ? "player" : "robot";
         matchInfo.innerText = `${currentTurn} go first`;
+        startingTurn = currentTurn;
         return;
       }
 
@@ -249,21 +411,26 @@
         const outcome = trigger(currentTurn);
         if (outcome.result === "Bang!") {
           playSfx(sounds[3]);
-      matchOver = true;
+          matchOver = true;
           playButton.innerText = `${outcome.result} ${stageInstruct[5][currentTurn]}`;
           matchInfo.innerText = `Game Over: ${outcome.winner.toUpperCase()} wins!`;
+
+          winner = outcome.winner;
           gunStage = 6;
           playButton.innerText = stageInstruct[6];
-          body.style.backgroundColor = "red";
+          body.style.background = backgroundStuff[0];
+
           gameResults = `<li>${outcome.winner} won, ${chances.innerText}</li>`;
           gamesList.insertAdjacentHTML("beforeend", gameResults);
+
+          saveData();
+          getData();
         } else {
           playSfx(sounds[1]);
           matchInfo.innerText = `${outcome.result} Next turn: ${currentTurn === "player" ? "Robot" : "Player"}`;
           playButton.innerText = stageInstruct[1];
           currentTurn = currentTurn === "player" ? "robot" : "player";
           gunStage = 1;
-          
         }
       } 
       if (gunStage === 6) {
@@ -302,6 +469,16 @@
     remvBullet.onclick = () => {
       manageAmmo("remove");
     };
+
+    menuButton.onclick = () => {
+      toggleMenu();
+    };
+
+    document.getElementById("helloButton").addEventListener("click", ()=>{alert("Hello guys I need money to buy food please help")});
+
+    document.addEventListener("DOMContentLoaded", ()=> {
+      getData();
+    })
 
     </script>
   </body>
